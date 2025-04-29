@@ -1,4 +1,6 @@
 import "./styles.css";
+import "./products-list-style.css";
+
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 // import Swiper and modules styles
@@ -6,6 +8,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import productsSlides from "./productsSlides";
+import productsList from "./loadProducts";
+import fetchData from "./fetchData";
+import loadProducts from "./loadProducts";
+
+const navOpen = document.querySelector(".header__menu-open");
+const navClose = document.querySelector(".navigation__menu-close");
+const nav = document.querySelector("nav");
+
+navOpen.addEventListener("click", () => nav.classList.add("visible"));
+navClose.addEventListener("click", () => nav.classList.remove("visible"));
 
 const swiper = new Swiper(".swiper", {
   direction: "horizontal",
@@ -17,36 +29,42 @@ const swiper = new Swiper(".swiper", {
   },
   pagination: {
     el: ".swiper-pagination",
-    type: "progressbar",
+    // type: "progressbar",
+    type: "custom",
+    renderCustom: (swiper, current, total) => {
+      const ratio = current / total;
+      const progressBarStyle =
+        "style='transform: translate3d(0px, 0px, 0px) scaleX(" +
+        ratio +
+        ") scaleY(1); transition-duration: 300ms;'";
+      const progressBar =
+        "<span class='swiper-pagination-progressbar-fill' " +
+        progressBarStyle +
+        "></span>";
+
+      let progressBarContainer =
+        "<div class='swiper-pagination-progressbar' style='height: 1px; top: 6px; width: 100%;'>";
+      progressBarContainer += progressBar;
+      progressBarContainer += "</span></div>";
+
+      return progressBarContainer;
+    },
   },
   slidesPerView: "auto",
   spaceBetween: 16,
-  breakpoints: {
-    // // when window width is >= 640px
-    // 640: {
-    //   slidesPerView: 2,
-    //   spaceBetween: 24,
-    // },
-  },
 });
 
 const swiperWrapper = document.querySelector(".swiper-wrapper");
 productsSlides(swiperWrapper);
 
-const baseUrl = "https://brandstestowy.smallhost.pl/api/random";
+// display data
+// const galleryDiv = document.querySelector(".products__gallery");
 
-async function getProducts() {
-  const url = `${baseUrl}?pageNumber=${"10"}&pageSize=${"14"}`;
-  const response = await fetch(url);
-  const productsData = await response.json();
-  console.log(productsData);
-  return productsData;
-}
-// getProducts();
-
-const navOpen = document.querySelector(".header__menu-open");
-const navClose = document.querySelector(".navigation__menu-close");
-const nav = document.querySelector("nav");
-
-navOpen.addEventListener("click", () => nav.classList.add("visible"));
-navClose.addEventListener("click", () => nav.classList.remove("visible"));
+// async function loadProducts() {
+//   const productsData = await fetchData(17);
+//   console.log(productsData);
+//   productsList(galleryDiv, productsData);
+//   // console.log(prodData);
+//   // productsList(galleryDiv, prodData);
+// }
+loadProducts();

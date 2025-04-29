@@ -61,7 +61,6 @@ export default function productsSlides(swiperWrapper) {
     } else if (product.label === "bestseller") {
       productFrLblTxt.textContent = "bestseller";
     } else {
-      console.log(product.label);
       productFrLblDiv.classList.add("is-not-labelled");
     }
     productFrLblDiv.appendChild(productFrLblTxt);
