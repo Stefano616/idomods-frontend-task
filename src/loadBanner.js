@@ -2,8 +2,8 @@ import "./banner-style.css";
 
 export default function loadBanner() {
   const bannerDiv = document.createElement("div");
-  bannerDiv.classList.add("product-list", "product-list--banner");
 
+  bannerDiv.classList.add("product-list--banner");
   const bannerDivContent = document.createElement("div");
   bannerDivContent.className = "product-list__banner-content";
 

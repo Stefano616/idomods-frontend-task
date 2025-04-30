@@ -8,20 +8,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import productsSlides from "./productsSlides";
-import productsList from "./loadProducts";
-import fetchData from "./fetchData";
 import loadProducts from "./loadProducts";
 
 const navOpen = document.querySelector(".header__menu-open");
 const navClose = document.querySelector(".navigation__menu-close");
 const nav = document.querySelector("nav");
+const overlayBg = document.querySelector("#overlay");
 
 navOpen.addEventListener("click", () => nav.classList.add("visible"));
 navClose.addEventListener("click", () => nav.classList.remove("visible"));
+overlayBg.addEventListener("click", () => nav.classList.remove("visible"));
+
+const links = document.querySelectorAll(".nav__link");
+
+if (links.length) {
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      links.forEach((link) => {
+        link.classList.remove("active");
+      });
+      link.classList.add("active");
+      nav.classList.remove("visible");
+    });
+  });
+}
 
 const swiper = new Swiper(".swiper", {
   direction: "horizontal",
-
+  rewind: true,
   modules: [Navigation, Pagination],
   navigation: {
     nextEl: ".swiper-arrow--next",
@@ -29,7 +43,6 @@ const swiper = new Swiper(".swiper", {
   },
   pagination: {
     el: ".swiper-pagination",
-    // type: "progressbar",
     type: "custom",
     renderCustom: (swiper, current, total) => {
       const ratio = current / total;
@@ -52,19 +65,14 @@ const swiper = new Swiper(".swiper", {
   },
   slidesPerView: "auto",
   spaceBetween: 16,
+  breakpoints: {
+    940: {
+      slidesPerView: "auto",
+      spaceBetween: 165,
+    },
+  },
 });
 
 const swiperWrapper = document.querySelector(".swiper-wrapper");
 productsSlides(swiperWrapper);
-
-// display data
-// const galleryDiv = document.querySelector(".products__gallery");
-
-// async function loadProducts() {
-//   const productsData = await fetchData(17);
-//   console.log(productsData);
-//   productsList(galleryDiv, productsData);
-//   // console.log(prodData);
-//   // productsList(galleryDiv, prodData);
-// }
 loadProducts();

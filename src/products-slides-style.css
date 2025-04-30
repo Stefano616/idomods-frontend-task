@@ -1,4 +1,4 @@
-.product {
+.swiper-slide.product {
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -54,4 +54,36 @@
 .product__text__title {
   font-size: 18px;
   font-weight: 600;
+  line-height: 120%;
+}
+.product__text__price {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.5px;
+}
+
+@media only screen and (min-width: 940px) {
+  .product__frame {
+    width: 441px;
+    height: 441px;
+  }
+  .product__frame__label {
+    padding: 4px 12px;
+  }
+  .label-description {
+    font-size: 16px;
+  }
+  .product__frame__favorite {
+    left: 401px;
+  }
+  .product__frame__img-area {
+    width: 380px;
+    height: 380px;
+    top: 30px;
+    left: 31px;
+  }
+  .product__text__title {
+    font-size: 20px;
+  }
 }

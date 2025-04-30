@@ -1,24 +1,32 @@
+import "./products-list-style.css";
 import fetchData from "./fetchData";
 import loadBanner from "./loadBanner";
-import "./products-list-style.css";
+import loadPopUp from "./loadPopUp";
 
-// const end = Math.min(loadedCount + productsBatch, products.length);
+const observerTarget = document.querySelector("#observer-target");
+let observerOptions = {
+  rootMargin: "200px",
+};
+const observer = new IntersectionObserver(loadProducts, observerOptions);
+observer.observe(observerTarget);
+
+let isBannerActive = false;
 
 const gallery = document.querySelector(".products__gallery");
 const batchSelect = document.querySelector("select");
 
 let productsBatchSize = batchSelect.value;
-
 batchSelect.addEventListener("change", () => {
   productsBatchSize = batchSelect.value;
+  gallery.textContent = "";
+  isBannerActive = false;
   loadProducts();
 });
 
-let isBannerActive = false;
+const productPopUpDialog = document.querySelector("#product-pop-up-dialog");
 
 export default async function loadProducts() {
   const productsData = await fetchData(productsBatchSize);
-  console.log(productsData);
   productsData.map((product, index) => {
     const productDiv = document.createElement("div");
     const productImgDiv = document.createElement("div");
@@ -27,6 +35,10 @@ export default async function loadProducts() {
     const productIdTxt = document.createElement("p");
 
     productDiv.className = "product-list";
+    productDiv.addEventListener("click", () => {
+      loadPopUp(product, productPopUpDialog);
+      productPopUpDialog.showModal();
+    });
     productImgDiv.className = "product-list__img-area";
 
     productIdDiv.className = "product-list__product-id";
@@ -36,7 +48,7 @@ export default async function loadProducts() {
     productImg.alt = product.text;
     productImgDiv.appendChild(productImg);
 
-    productIdTxt.textContent = product.id;
+    productIdTxt.textContent = `id: ${product.id}`;
     productIdDiv.appendChild(productIdTxt);
 
     productDiv.append(productImgDiv, productIdDiv);

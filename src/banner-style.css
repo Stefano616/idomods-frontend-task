@@ -2,10 +2,12 @@
   width: 100%;
   min-width: 328px;
   min-height: 498px;
+  border-radius: 6px;
   padding: 32px 24px;
   background-image: url("../assets/banner\ image.jpg");
   background-size: cover;
-  grid-column: 1 / span 2;
+  background-position: center;
+  grid-column: 1 / -1;
   grid-row-start: 3;
 }
 .product-list__banner-content {
@@ -34,7 +36,6 @@
   letter-spacing: -1.5px;
 }
 .product-list__banner-btn {
-  width: 100%;
   padding: 12px 48px;
   background-color: var(--color-bg-1);
   border-radius: 6px;
@@ -52,7 +53,20 @@
   justify-content: center;
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 940px) {
+  .product-list--banner {
+    max-width: 906px;
+    max-height: 441px;
+    justify-self: center;
+    padding: 32px 96px;
+  }
+  .product-list__banner-title {
+    font-size: 42px;
+  }
 }
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1870px) {
+  .product-list--banner {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+  }
 }

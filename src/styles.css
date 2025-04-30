@@ -16,11 +16,17 @@
   font-size: 16px;
   color: var(--color-text);
 }
+html {
+  scroll-behavior: smooth;
+}
 
 h1 {
   font-size: 32px;
   font-weight: 700;
+  line-height: 120%;
+  letter-spacing: -1.5px;
 }
+
 header {
   padding-inline: 16px;
   position: fixed;
@@ -42,16 +48,23 @@ header .container,
   padding: 24px 0;
 }
 .brand,
+.brand-container,
 .header__menu-open,
 .navigation__menu-close {
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
 .header__brand-title,
-.header__menu-title {
+.header__menu-title,
+.login-name {
   text-transform: uppercase;
   letter-spacing: -0.5px;
+}
+.header__brand-company-name,
+.login {
+  display: none;
 }
 
 nav {
@@ -80,6 +93,11 @@ nav a {
   text-decoration: none;
   text-transform: uppercase;
 }
+nav a:hover,
+nav a.active {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 .visible {
   right: 0;
@@ -100,11 +118,12 @@ nav a {
 }
 
 #hero-section {
+  margin-top: 64px;
   padding-inline: 16px;
   display: flex;
   flex-direction: column;
   justify-content: end;
-  gap: 10px;
+  gap: 24px;
   height: 100vh;
 }
 
@@ -125,19 +144,30 @@ img {
   padding: 36px 16px 32px 16px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+.featured-products {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
 }
 .featured__subtitle {
   text-transform: uppercase;
+  line-height: 140%;
+  letter-spacing: -0.5px;
 }
-.swiper {
+.featured-products-slider {
+  display: flex !important;
+  flex-direction: column;
+  gap: 32px;
   position: relative;
   width: 100%;
   height: 100%;
 }
 .swiper-navigation {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   position: absolute;
   top: 36%;
   width: 100%;
@@ -180,4 +210,91 @@ img {
   border: transparent;
   font-weight: 700;
   padding-inline: 12px;
+}
+
+#product-pop-up-dialog {
+}
+
+@media only screen and (min-width: 940px) {
+  header {
+    padding-inline: 42px;
+  }
+  header .container {
+    padding-top: 32px;
+  }
+  .login {
+    display: block;
+  }
+  .brand-container,
+  .login-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand {
+    gap: 32px;
+  }
+  .header__brand-company-name {
+    display: block;
+    text-transform: uppercase;
+  }
+  .header__menu-open,
+  .navigation__top-bar-container {
+    display: none;
+  }
+  nav {
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    position: static;
+    justify-content: center;
+  }
+  nav > ul {
+    flex-direction: row;
+    gap: 42px;
+  }
+  #hero-section {
+    margin-top: 160px;
+    padding-inline: 42px;
+    gap: 42px;
+  }
+  .hero__logo-container > svg {
+    width: 918px;
+    height: 138px;
+  }
+  #featured-section {
+    height: 900px;
+    padding: 96px 42px;
+  }
+  .featured-products {
+    gap: 42px;
+  }
+  .featured__subtitle {
+    line-height: 150%;
+  }
+  .featured__title {
+    font-size: 42px;
+  }
+  .featured-products-slider {
+    gap: 64px;
+  }
+  .featured-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .featured__subtitle {
+    line-height: 150%;
+    letter-spacing: -0.5px;
+  }
+  .featured__title {
+    line-height: 120%;
+    font-size: 42px;
+    letter-spacing: -1.5px;
+  }
+  .products__intro {
+    flex-direction: row;
+    gap: 24px;
+  }
 }
