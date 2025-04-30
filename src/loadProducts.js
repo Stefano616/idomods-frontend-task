@@ -26,42 +26,47 @@ batchSelect.addEventListener("change", () => {
 const productPopUpDialog = document.querySelector("#product-pop-up-dialog");
 
 export default async function loadProducts() {
-  const productsData = await fetchData(productsBatchSize);
-  productsData.map((product, index) => {
-    const productDiv = document.createElement("div");
-    const productImgDiv = document.createElement("div");
-    const productImg = document.createElement("img");
-    const productIdDiv = document.createElement("div");
-    const productIdTxt = document.createElement("p");
+  try {
+    const productsData = await fetchData(productsBatchSize);
+    productsData.map((product, index) => {
+      const productDiv = document.createElement("div");
+      const productImgDiv = document.createElement("div");
+      const productImg = document.createElement("img");
+      const productIdDiv = document.createElement("div");
+      const productIdTxt = document.createElement("p");
 
-    productDiv.className = "product-list";
-    productDiv.addEventListener("click", () => {
-      loadPopUp(product, productPopUpDialog);
-      productPopUpDialog.showModal();
+      productDiv.className = "product-list";
+      productDiv.addEventListener("click", () => {
+        loadPopUp(product, productPopUpDialog);
+        productPopUpDialog.showModal();
+      });
+      productImgDiv.className = "product-list__img-area";
+
+      productIdDiv.className = "product-list__product-id";
+      productIdTxt.className = "product-list__product-id-txt";
+
+      productImg.src = product.image;
+      productImg.alt = product.text;
+      productImgDiv.appendChild(productImg);
+
+      productIdTxt.textContent = `id: ${product.id}`;
+      productIdDiv.appendChild(productIdTxt);
+
+      productDiv.append(productImgDiv, productIdDiv);
+
+      const banner = !isBannerActive && loadBanner();
+
+      if (index === 4 && banner) {
+        gallery.append(banner, productDiv);
+        isBannerActive = true;
+      } else {
+        gallery.appendChild(productDiv);
+      }
     });
-    productImgDiv.className = "product-list__img-area";
-
-    productIdDiv.className = "product-list__product-id";
-    productIdTxt.className = "product-list__product-id-txt";
-
-    productImg.src = product.image;
-    productImg.alt = product.text;
-    productImgDiv.appendChild(productImg);
-
-    productIdTxt.textContent = `id: ${product.id}`;
-    productIdDiv.appendChild(productIdTxt);
-
-    productDiv.append(productImgDiv, productIdDiv);
-
-    const banner = !isBannerActive && loadBanner();
-
-    if (index === 4 && banner) {
-      gallery.append(banner, productDiv);
-      isBannerActive = true;
-    } else {
-      gallery.appendChild(productDiv);
-    }
-  });
+  } catch (err) {
+    alert(`Error in loading products:
+      ${err}`);
+  }
 }
 
 {
