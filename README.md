@@ -1,2 +1,2 @@
-# todo-lists-TOP
-Project developed during "The Odin Project" course, for practicing purposes on OOP, DOM manipulation,  web storage API
+# Frontend task at IdoMods
+The project was developed as an interview task for IdoMods.
