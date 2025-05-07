@@ -35,6 +35,9 @@
   left: 260px;
   z-index: 1;
 }
+.fav-icon:hover {
+  cursor: pointer;
+}
 .fav-icon svg:hover path,
 .fav-icon.is-favorite svg path {
   d: path(

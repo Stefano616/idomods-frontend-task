@@ -23,6 +23,9 @@ button {
   background-color: transparent;
   border: none;
 }
+button:hover {
+  cursor: pointer;
+}
 
 h1 {
   font-size: 32px;
@@ -175,6 +178,10 @@ img {
   flex-direction: column;
   align-items: center;
   gap: 32px;
+}
+select,
+::picker(select) {
+  cursor: pointer;
 }
 .products__intro {
   display: flex;

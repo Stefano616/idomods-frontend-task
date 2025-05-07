@@ -14,6 +14,9 @@
   border-radius: 6px;
   background-color: var(--color-bg-2);
 }
+.product-list:hover {
+  cursor: pointer;
+}
 .product-list__img-area {
   min-width: 142px;
   max-width: 377px;
